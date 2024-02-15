@@ -35,7 +35,6 @@ using Microsoft.Extensions.Hosting;
 using Optimizely.Labs.MarketingAutomationIntegration.ODP;
 using System.IO;
 using UNRVLD.ODP.VisitorGroups.Initilization;
-using ServiceDescriptor = Castle.MicroKernel.Registration.ServiceDescriptor;
 
 namespace Foundation
 {
