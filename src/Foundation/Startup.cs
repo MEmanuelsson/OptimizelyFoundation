@@ -2,6 +2,7 @@
 using Advanced.CMS.GroupingHeader;
 using EPiServer.Authorization;
 using EPiServer.Cms.TinyMce.SpellChecker;
+using EPiServer.Commerce.Catalog;
 using EPiServer.ContentApi.Cms;
 using EPiServer.ContentApi.Cms.Internal;
 using EPiServer.ContentApi.Commerce;
@@ -34,6 +35,7 @@ using Microsoft.Extensions.Hosting;
 using Optimizely.Labs.MarketingAutomationIntegration.ODP;
 using System.IO;
 using UNRVLD.ODP.VisitorGroups.Initilization;
+using ServiceDescriptor = Castle.MicroKernel.Registration.ServiceDescriptor;
 
 namespace Foundation
 {
@@ -246,6 +248,12 @@ namespace Foundation
             // Add GroupingHeader
             // https://github.com/advanced-cms/grouping-header/
             services.AddGroupingHeader();
+
+
+            var customEntryInformationDescriptor =
+                new Microsoft.Extensions.DependencyInjection.ServiceDescriptor(typeof(IEntryInformation), typeof(CustomEntryInformation),
+                    ServiceLifetime.Singleton);
+            services.Replace(customEntryInformationDescriptor);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
