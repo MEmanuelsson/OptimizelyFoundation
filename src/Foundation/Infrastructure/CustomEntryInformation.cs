@@ -8,19 +8,19 @@ namespace Foundation.Infrastructure
         IRelationRepository _relationRepository = ServiceLocator.Current.GetInstance<IRelationRepository>();
         IUrlResolver _urlResolver = ServiceLocator.Current.GetInstance<IUrlResolver>();
 
-        //IEntryInformation _defaultImplementation;
-        //public CustomEntryInformation(IEntryInformation defaultImplementation)
-        //{
-        //    _defaultImplementation = defaultImplementation;
-        //}
+        IEntryInformation _defaultImplementation;
+        public CustomEntryInformation(IEntryInformation defaultImplementation)
+        {
+            _defaultImplementation = defaultImplementation;
+        }
 
         public IDictionary<string, string> GetCustomProperties(EntryContentBase entry)
         {
             var myVariant = entry as MyVariant;
-            //if (myVariant == null)
-            //{
-            //    return _defaultImplementation.GetCustomProperties(entry);
-            //}
+            if (myVariant == null)
+            {
+                return _defaultImplementation.GetCustomProperties(entry);
+            }
 
             return new Dictionary<string, string>() {
                 { nameof(myVariant.SizeNew), myVariant.SizeNew.ToString() },
